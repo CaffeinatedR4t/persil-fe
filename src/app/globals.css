@@ -14,12 +14,14 @@ body {
 }
 
 .root {
-  width: 100vw;
-  height: 100vh;
+  width: calc(100dvw / 0.75);
+  height: calc(100dvh / 0.75);
   display: grid;
   grid-template-rows: 80px 1fr;
   overflow: hidden;
   background: linear-gradient(182.14deg, #000000 1.8%, #223A3F 65%, #2C4121 100%);
+  zoom: 0.75;
+  transform-origin: top left;
 }
 
 /* ── Navbar ── */
@@ -28,7 +30,10 @@ body {
   align-items: center;
   padding: 0 28px;
   gap: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .navbar-brand {
@@ -42,39 +47,45 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
-  gap: 48px;
+  align-items: center;
+  gap: 4px;
 }
 
 .nav-item {
   font-size: 20px;
   font-weight: 400;
-  color: #F4F1EB;
-  padding: 6px 18px;
+  color: rgba(244, 241, 235, 0.7);
+  padding: 6px 22px;
   border-radius: 20px;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
 
 .nav-item-active {
-  background: rgba(255, 255, 255, 0.1);
-  font-weight: 500;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #F4F1EB;
+  font-weight: 600;
 }
 
 .nav-item:hover:not(.nav-item-active) {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.07);
+  color: #F4F1EB;
 }
 
 .navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 260px;
-  justify-content: flex-end;
+  width: 160px;
+  flex-shrink: 0;
 }
 
 .icon-btn {
   width: 39px;
   height: 39px;
-  background: rgba(18, 17, 8, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -97,17 +108,21 @@ body {
 .content {
   display: grid;
   grid-template-columns: 720px 1fr;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* ── Left Panel ── */
 .left-panel {
-  padding: 16px 28px 20px;
+  padding: 16px 28px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   overflow-y: auto;
   scrollbar-width: none;
+  min-height: 0;
 }
 .left-panel::-webkit-scrollbar { display: none; }
 
@@ -179,6 +194,7 @@ body {
 .map-area {
   position: relative;
   overflow: hidden;
+  min-height: 0;
 }
 
 /* ── Leaflet ── */
@@ -212,9 +228,15 @@ body {
   z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 20px;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
   color: #F4F1EB;
+  background: rgba(0,0,0,0.35);
+  padding: 5px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .map-time-buttons {
@@ -230,22 +252,29 @@ body {
   font-family: 'Switzer', sans-serif;
   font-size: 20px;
   font-weight: 600;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.75);
   padding: 10px 0;
   width: 127px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .time-btn-active {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
 }
 
 .map-zoom-btns {
   position: absolute;
-  bottom: 80px;
+  bottom: 30px;
   left: 16px;
   z-index: 1000;
   display: flex;
@@ -257,6 +286,9 @@ body {
   width: 49px;
   height: 49px;
   background: rgba(18, 17, 8, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -264,6 +296,11 @@ body {
   font-size: 24px;
   color: #fff;
   font-weight: 300;
+  transition: background 0.15s, border-color 0.15s;
+}
+.zoom-btn:hover {
+  background: rgba(18, 17, 8, 0.7);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .map-hex-popup {

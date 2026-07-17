@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, TileLayer, GeoJSON, useMap } from "react-leaflet";
 import * as h3 from "h3-js";
 import type { MapProps } from "./MapWrapper";
@@ -76,9 +78,9 @@ export default function MapComponent({
   }, [driftCells]);
 
   const timeLabels: Record<string, string> = {
-    "1w": "1 Minggu",
-    "1m": "1 Bulan",
-    "3m": "3 Bulan",
+    "2w":     "2 Minggu",
+    "1m":     "1 Bulan",
+    "season": "Sisa Musim",
   };
 
   const overallStatus =
@@ -154,9 +156,7 @@ export default function MapComponent({
 
       {/* Location pin — top right */}
       <div className="map-location-pin">
-        <svg width="14" height="18" viewBox="0 0 14 18" fill="#F4F1EB">
-          <path d="M7 0C3.13 0 0 3.13 0 7c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5C5.62 9.5 4.5 8.38 4.5 7S5.62 4.5 7 4.5 9.5 5.62 9.5 7 8.38 9.5 7 9.5z"/>
-        </svg>
+        <MapPin size={14} color="#F4F1EB" fill="#F4F1EB" strokeWidth={1} />
         Kec. Ciparay, Kab. Bandung
       </div>
 
@@ -171,7 +171,7 @@ export default function MapComponent({
              selectedCell.color === "yellow" ? "Perlu perhatian" : "Zona sehat"}
           </div>
           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 8 }}>
-            Identified: 📅 Jul 5 - Aug 24
+            Dianalisis: {new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}
           </div>
           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 10 }}>
             NDVI: {(0.45 + selectedCell.drift_score).toFixed(2)}
@@ -195,13 +195,29 @@ export default function MapComponent({
 
       {/* Time filter buttons — bottom right */}
       <div className="map-time-buttons">
-        {(["1w", "1m", "3m"] as const).map(h => (
+        {(["2w", "1m", "season"] as const).map(h => (
           <button
             key={h}
-            className={`time-btn${timeHorizon === h ? " time-btn-active" : ""}`}
+            className="time-btn"
             onClick={() => onTimeChange(h)}
+            style={{ position: "relative" }}
           >
-            {timeLabels[h]}
+            {timeHorizon === h && (
+              <motion.span
+                layoutId="time-pill"
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  borderRadius: 10,
+                  background: "rgba(255,255,255,0.45)",
+                  zIndex: 0,
+                }}
+                transition={{ type: "spring", stiffness: 380, damping: 32 }}
+              />
+            )}
+            <span style={{ position: "relative", zIndex: 1 }}>
+              {timeLabels[h]}
+            </span>
           </button>
         ))}
       </div>

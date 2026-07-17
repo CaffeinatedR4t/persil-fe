@@ -5,8 +5,8 @@ import type { DriftCell } from "@/app/page";
 export interface MapProps {
   driftCells: DriftCell[];
   zoneSummary: { good: number; attention: number; risk: number };
-  timeHorizon: "1w" | "1m" | "3m";
-  onTimeChange: (h: "1w" | "1m" | "3m") => void;
+  timeHorizon: "2w" | "1m" | "season";
+  onTimeChange: (h: "2w" | "1m" | "season") => void;
   onCellSelect: (cell: DriftCell | null) => void;
   selectedCell: DriftCell | null;
 }
