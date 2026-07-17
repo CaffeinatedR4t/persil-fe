@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { TrendingUp, TrendingDown, Droplet, CalendarDays, Wheat, ShieldCheck } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   LineChart, Line, XAxis, YAxis,
   ResponsiveContainer, CartesianGrid,
@@ -144,30 +144,30 @@ const HORIZON_NARRATION_PREFIX: Record<TimeHorizon, string> = {
 
 // ── Framer Motion Variants ───────────────────────────────────────────────────
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { 
+    transition: {
       duration: 0.6,
-      delay: 2.2, 
-      staggerChildren: 0.15, 
-      delayChildren: 2.5 
+      delay: 2.2,
+      staggerChildren: 0.15,
+      delayChildren: 2.5
     }
   }
 };
 
-const leftItemVariants = {
+const leftItemVariants: Variants = {
   hidden: { opacity: 0, x: -50 },
   show: { opacity: 1, x: 0, transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
 };
 
-const mapVariants = {
+const mapVariants: Variants = {
   hidden: { opacity: 0, scale: 0.96, x: 30 },
   show: { opacity: 1, scale: 1, x: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } }
 };
 
-const navVariants = {
+const navVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
 };
