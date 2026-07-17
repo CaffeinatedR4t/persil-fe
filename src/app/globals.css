@@ -1,121 +1,283 @@
-:root {
-  --bg: #0f172a;
-  --panel-bg: rgba(30, 41, 59, 0.7);
-  --border: rgba(255, 255, 255, 0.1);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --accent: #10b981;
-  --accent-glow: rgba(16, 185, 129, 0.2);
-  --danger: #ef4444;
-  --warning: #f59e0b;
-}
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+button { background: none; border: none; cursor: pointer; font-family: inherit; }
+
+/* ── Root ── */
+html, body { width: 100%; height: 100%; overflow: hidden; }
 
 body {
-  background-color: var(--bg);
-  color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  min-height: 100vh;
+  font-family: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #F4F1EB;
+  background: linear-gradient(182.14deg, #000000 1.8%, #223A3F 65%, #2C4121 100%);
+}
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 80px 1fr;
+  overflow: hidden;
+  background: linear-gradient(182.14deg, #000000 1.8%, #223A3F 65%, #2C4121 100%);
+}
+
+/* ── Navbar ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 160px;
+}
+
+.navbar-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}
+
+.nav-item {
+  font-size: 20px;
+  font-weight: 400;
+  color: #F4F1EB;
+  padding: 6px 18px;
+  border-radius: 20px;
+  transition: background 0.15s;
+}
+
+.nav-item-active {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+}
+
+.nav-item:hover:not(.nav-item-active) {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 260px;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  width: 39px;
+  height: 39px;
+  background: rgba(18, 17, 8, 0.5);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #D9D9D9;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Content ── */
+.content {
+  display: grid;
+  grid-template-columns: 720px 1fr;
   overflow: hidden;
 }
 
-/* Glassmorphism utilities */
-.glass {
-  background: var(--panel-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+/* ── Left Panel ── */
+.left-panel {
+  padding: 16px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.left-panel::-webkit-scrollbar { display: none; }
+
+.greeting {
+  font-size: 36px;
+  font-weight: 500;
+  color: #F4F1EB;
+  padding-left: 4px;
 }
 
+/* ── Cards ── */
 .glass-card {
-  border-radius: 16px;
-  padding: 24px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 18px 22px;
 }
 
-.glass-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+.metric-chip {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 14px 16px;
 }
 
-/* Map Overrides */
+/* ── Yield Card ── */
+.yield-card {
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.yield-card-top {
+  background: linear-gradient(90deg, #FFD072 0%, #FFE5BC 100%);
+  padding: 16px 22px 20px;
+}
+
+.yield-card-bottom {
+  background: linear-gradient(90deg, rgba(254, 208, 116, 0.35) 0%, rgba(255, 228, 183, 0.35) 100%);
+  padding: 14px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.yield-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.yield-divider {
+  border: none;
+  border-top: 1px solid rgba(137, 146, 128, 0.75);
+}
+
+.alert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #984215;
+  color: #FFD072;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 19px;
+}
+
+/* ── Map area ── */
+.map-area {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Leaflet ── */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  border-radius: 16px;
-  background: #0f172a !important; /* blend map bg with dark mode */
+  background: #0f172a !important;
 }
 
-/* Micro-animations */
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
-  70% { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+/* hide default leaflet zoom buttons — we render custom ones */
+.leaflet-control-zoom { display: none !important; }
+
+/* ── Map Overlays ── */
+.map-summary-card {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  background: rgba(30, 40, 30, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 14px 18px;
+  min-width: 280px;
 }
 
-.badge {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.badge-warning {
-  background: rgba(245, 158, 11, 0.2);
-  color: var(--warning);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-}
-
-.badge-danger {
-  background: rgba(239, 68, 68, 0.2);
-  color: var(--danger);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-/* Layout */
-.app-container {
+.map-location-pin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
   display: flex;
-  height: 100vh;
-  padding: 16px;
-  gap: 16px;
+  align-items: center;
+  gap: 6px;
+  font-size: 20px;
+  color: #F4F1EB;
 }
 
-.sidebar {
-  width: 400px;
+.map-time-buttons {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+
+.time-btn {
+  font-family: 'Switzer', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  padding: 10px 0;
+  width: 127px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+
+.time-btn-active {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.map-zoom-btns {
+  position: absolute;
+  bottom: 80px;
+  left: 16px;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  z-index: 10;
-  overflow-y: auto;
+  gap: 4px;
 }
 
-.map-wrapper {
-  flex: 1;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid var(--border);
+.zoom-btn {
+  width: 49px;
+  height: 49px;
+  background: rgba(18, 17, 8, 0.5);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  font-weight: 300;
 }
 
-.header {
-  margin-bottom: 8px;
+.map-hex-popup {
+  position: absolute;
+  z-index: 1000;
+  background: rgba(18, 17, 8, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 16px 18px;
+  width: 310px;
+  pointer-events: auto;
 }
-.header h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #10b981, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 4px;
-}
-.header p {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
+
+/* ── Recharts overrides ── */
+.recharts-cartesian-grid-vertical line { stroke: rgba(255,255,255,0.08); }
+.recharts-xAxis .recharts-cartesian-axis-tick text { fill: #F4F1EB !important; font-size: 12px; }

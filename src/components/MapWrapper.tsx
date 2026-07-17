@@ -1,8 +1,18 @@
 "use client";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import type { DriftCell } from "@/app/page";
 
-const MapComponent = dynamic(() => import('./Map'), { ssr: false });
+export interface MapProps {
+  driftCells: DriftCell[];
+  zoneSummary: { good: number; attention: number; risk: number };
+  timeHorizon: "1w" | "1m" | "3m";
+  onTimeChange: (h: "1w" | "1m" | "3m") => void;
+  onCellSelect: (cell: DriftCell | null) => void;
+  selectedCell: DriftCell | null;
+}
 
-export default function MapWrapper({ onSelectKabupaten, onSelectPlot }: { onSelectKabupaten: (code: string) => void, onSelectPlot?: (plot: any) => void }) {
-  return <MapComponent onSelectKabupaten={onSelectKabupaten} onSelectPlot={onSelectPlot} />;
+const MapComponent = dynamic(() => import("./Map"), { ssr: false });
+
+export default function MapWrapper(props: MapProps) {
+  return <MapComponent {...props} />;
 }
